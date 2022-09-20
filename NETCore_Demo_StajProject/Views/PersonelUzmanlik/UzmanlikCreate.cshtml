@@ -1,0 +1,25 @@
+﻿@model NETCore_Demo_StajProject.DAL.PersonelUzmanlik
+@{
+    Layout="_LayoutAdmin";
+}
+<form asp-controller="PersonelUzmanlik" asp-action="Create" method="post">
+
+    @Html.HiddenFor(m=>m.PersonelId)
+
+<table style="width:70%">
+    @*dropdown koyulacak*@
+  <tr>
+
+          <th> Uzmanlık Ad:</th> 
+            <td>        
+                @Html.DropDownList("UzmanlikId",null,"Seçiniz", new {@class="form-control" })
+            
+            </td>
+
+  </tr>
+
+</table>
+
+
+  <br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

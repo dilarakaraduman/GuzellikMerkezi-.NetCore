@@ -1,0 +1,23 @@
+﻿@model List<NETCore_Demo_StajProject.DAL.Operasyonlar>
+@{
+    Layout = "_LayoutAdmin";
+}
+<a class="btn btn-info" asp-action="create" asp-controller="Operasyonlar">+Ekle</a>
+
+<table class="table">
+    <thead>
+           <tr>       
+             <th>Operasyon Id</th>
+             <th>Operasyonlar Adı</th>           
+           </tr>
+
+    </thead>
+    @foreach(var item in Model){
+         <tr>
+            <td>@item.OperasyonId</td> 
+            <td>@item.OperasyonAd</td>
+              <td><a class="btn btn-info" href="Edit\@item.OperasyonId"> + Düzenle</a>&nbsp
+                <a class="btn btn-info" href="Remove\@item.OperasyonId">Sil</a></td>
+         </tr>
+}
+</table>

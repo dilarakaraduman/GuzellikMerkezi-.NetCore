@@ -1,0 +1,36 @@
+﻿@model List<NETCore_Demo_StajProject.Models.RandevuVM>
+
+<table class="table"style="width:100%">
+	<tr>
+		<th><a class="btn btn-info" href="/Randevu/Create">+Randevu Ekle</a></th>
+	</tr>
+	<tr>	
+		<th><a class="btn btn-info" href="/Randevu/AktifRandevular">Aktif Randevular</a></th>
+	</tr>
+	<tr>	
+		<th><a class="btn btn-info" href="/Randevu/GecmisRandevular">Geçmiş Randevular</a></th>
+	</tr>
+	@*	<thead>
+	<tr>
+	<th>Müşteri Adı</th>
+	<th>Operasyon Adı</th>
+	<th>Personel Adı</th>
+	<th>Tarih:</th>
+	<th>Salon:</th>
+
+	</tr>
+
+	</thead>
+	@foreach (var item in Model)
+	{
+	<tr>
+
+	<td>@item.Musteri.MusteriAd</td>
+	<td>@item.Operasyonlar.OperasyonAd</td>
+	<td>@item.Personel.PersonelAd</td>
+	<td>@(item.Randevu.Tarih.ToShortDateString())</td>
+	<td>@item.Salon.SalonNo</td>
+
+	</tr>
+	}*@
+</table>

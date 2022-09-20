@@ -1,0 +1,11 @@
+﻿@model NETCore_Demo_StajProject.DAL.Personel
+@{
+    Layout="_LayoutAdmin";
+}
+<form asp-controller="Personel" asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="PersonelId" />
+    <input  asp-for="PersonelAd" />
+
+    <button type="submit" class="btn btn-primary">Düzenle</button>
+</form>

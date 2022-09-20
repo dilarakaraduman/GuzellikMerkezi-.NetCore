@@ -1,0 +1,36 @@
+﻿@model List<NETCore_Demo_StajProject.DAL.Musteri>
+@{
+    Layout = "_LayoutAdmin";
+}
+<a class="btn btn-info" asp-action="create" asp-controller="Musteri">+Ekle</a>
+<a class="btn btn-info" href="\Operasyonlar\Index"> Operasyonlar Listesini Görüntüle</a>
+<table class="table">
+    <thead>
+           <tr>       
+             <th>ID</th>
+             <th>Musteri Adı</th>
+             <th>MusteriSoyad</th> 
+             <th>MusteriCinsiyet</th>
+             <th>MusteriMail</th> 
+             <th>MusteriParola</th>
+             <th>MusteriTel</th>
+             <th>Doğum Tarihi</th>
+           </tr>
+
+    </thead>
+    @foreach(var item in Model){
+         <tr>
+            <td>@item.MusteriId</td> 
+            <td>@item.MusteriAd</td>
+            <td>@item.MusteriSoyad</td> 
+            <td>@item.MusteriCinsiyet</td>
+            <td>@item.MusteriMail</td> 
+            <td>@item.MusteriParola</td>
+            <td>@item.MusteriTel</td>
+            <td>@item.MusteriDogumtarihi</td>
+
+            <td><a class="btn btn-info" href="Musteri\Edit\@item.MusteriId"> + Düzenle</a>&nbsp
+                <a class="btn btn-info" href="Musteri\Remove\@item.MusteriId">Sil</a>
+         </tr>
+}
+</table>

@@ -1,0 +1,39 @@
+﻿@model NETCore_Demo_StajProject.DAL.Personel
+@{
+    Layout="_LayoutAdmin";
+}
+<form asp-controller="Personel" asp-action="Create" method="post">
+	<table style="width:70%">
+
+		<tr>
+			<th> Personel Ad:</th>
+			<td><input asp-for="PersonelAd" />                </td>
+		</tr>
+		<tr>
+			<th> Personel Soyad: </th>
+			<td> <input asp-for="PersonelSoyad" />           </td>
+		</tr>
+		<tr>
+			<th> Personel Cinsiyet: </th>
+			<td> <input asp-for="PersonelCinsiyet" />       </td>
+		</tr>
+		<tr>
+			<th> Personel Tel: </th>
+			<td> <input asp-for="PersonelTel" />            </td>
+		</tr>
+		<tr>
+			<th> Personel Mail: </th>
+			<td> <input asp-for="PersonelMail" />           </td>
+		</tr>
+		<tr>
+			<th> Personel Parola :</th>
+			<td> <input asp-for="PersonelParola" />         </td>
+		</tr>
+		<tr>
+			<th> Ekip lideri Id :</th>
+			<td> <input asp-for="EkiplideriId" />           </td>
+		</tr>
+
+	</table>
+	<br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

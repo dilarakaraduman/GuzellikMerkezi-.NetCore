@@ -1,0 +1,6 @@
+﻿@model NETCore_Demo_StajProject.DAL.Randevu
+    
+<form asp-controller="Randevu" asp-action="Remove" method="post">
+    @Html.HiddenFor(m=>m.RandevuId)
+     <button type="submit" class="btn btn-primary">Sil</button>
+</form>

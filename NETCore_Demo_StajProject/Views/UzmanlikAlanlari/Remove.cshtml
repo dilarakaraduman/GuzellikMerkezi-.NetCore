@@ -1,0 +1,16 @@
+﻿@model NETCore_Demo_StajProject.DAL.UzmanlikAlanlari
+@{
+    Layout = "_LayoutAdmin";
+}
+<form asp-controller="UzmanlikAlanlari" asp-action="Remove" method="post">
+
+<table style="width:70%">
+
+  <tr>
+          <th> UzmanlikAlanlari Ad:</th> 
+            <td><input asp-for="UzmanlikAd" />                </td>
+
+  </tr>
+</table>
+  <br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

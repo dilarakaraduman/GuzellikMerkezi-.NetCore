@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">HOŞGELDİNİZ</h1>
+
+</div>
+<div>
+    <a class="btn btn-info" href="\Randevu\RandevuGoruntule">Randevu Goruntule</a><br />
+    Firma Adı:
+    @ViewBag.FirmaAdi
+    <br/>
+    Adres:
+    @ViewData["Adres"]
+    <br/>
+    Telefon:
+    @TempData["Telefon"]
+    <div align="center">
+    <a href="#"><img src="http://artstyle.com.tr/blog/wp-content/uploads/2014/05/g%C3%BCzellik-2.jpg"
+        alt="Örnek Resim" style="width:400px;height: 250px" /></a>
+    </div>
+</div>

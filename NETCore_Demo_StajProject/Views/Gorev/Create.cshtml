@@ -1,0 +1,19 @@
+﻿@model NETCore_Demo_StajProject.DAL.Gorev
+
+@{
+    Layout="_LayoutAdmin";
+}
+<form asp-controller="Gorev" asp-action="Create" method="post">
+
+<table style="width:70%">
+
+  <tr>
+          <th> Gorev Ad:</th> 
+            <td><input asp-for="GorevAd" />                </td>
+
+  </tr>
+</table>
+  <br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>
+
+

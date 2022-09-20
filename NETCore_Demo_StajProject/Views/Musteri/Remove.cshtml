@@ -1,0 +1,10 @@
+﻿@model NETCore_Demo_StajProject.DAL.Musteri
+
+<form asp-controller="Musteri" asp-action="Remove" method="post">
+
+    <input type="hidden" asp-for="MusteriId" />
+    <input  asp-for="MusteriAd" />
+    <input type="datetime"  asp-for="MusteriDogumtarihi" />
+
+    <button type="submit" class="btn btn-primary">Sil</button>
+</form>

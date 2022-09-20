@@ -1,0 +1,23 @@
+﻿@model List<NETCore_Demo_StajProject.DAL.Gorev>
+@{
+    Layout="_LayoutAdmin";
+}
+<a class="btn btn-info" asp-action="create" asp-controller="Gorev">+Ekle</a>
+
+<table class="table">
+    <thead>
+           <tr>       
+             <th>ID</th>
+             <th>Gorev Adı</th>           
+           </tr>
+
+    </thead>
+    @foreach(var item in Model){
+         <tr>
+            <td>@item.GorevId</td> 
+            <td>@item.GorevAd</td>
+              <td><a class="btn btn-info" href="Edit\@item.GorevId"> + Düzenle</a>&nbsp
+                <a class="btn btn-info" href="Remove\@item.GorevId">Sil</a></td>
+         </tr>
+}
+</table>

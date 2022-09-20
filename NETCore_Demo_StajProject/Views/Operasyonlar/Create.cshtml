@@ -1,0 +1,24 @@
+﻿@model NETCore_Demo_StajProject.DAL.Operasyonlar
+@{
+    Layout = "_LayoutAdmin";
+}
+<form asp-controller="Operasyonlar" asp-action="Create" method="post">
+
+<table style="width:70%">
+
+  <tr>
+          <th> Operasyon Ad:</th> 
+                <td><input asp-for="OperasyonAd" />                </td>
+          <th> Operasyon Sure:</th> 
+                <td><input asp-for="SureId" />                </td>
+           <th> Operasyon Sure:</th> 
+                <td><input asp-for="SureId" />                </td>
+          <th> Seans sayisi</th> 
+                <td><input asp-for="Seans_sayisi" />                </td>
+          <th> Tutar</th> 
+                <td><input asp-for="Tutar" />                </td>
+
+  </tr>
+</table>
+  <br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

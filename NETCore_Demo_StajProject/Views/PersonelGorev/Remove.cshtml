@@ -1,0 +1,8 @@
+﻿@model NETCore_Demo_StajProject.DAL.PersonelGorev
+@{
+    Layout="_LayoutAdmin";
+}
+<form asp-controller="PersonelGorev" asp-action="Remove" method="post">
+    @Html.HiddenFor(m=>m.PersonelId)
+     <button type="submit" class="btn btn-primary">Sil</button>
+</form>

@@ -1,0 +1,58 @@
+﻿@model NETCore_Demo_StajProject.DAL.Randevu
+@using NETCore_Demo_StajProject.DAL
+
+@*@{
+    Layout="_LayoutAdmin";
+}*@
+
+<form asp-controller="Randevu" asp-action="Create" method="post">
+
+    @Html.HiddenFor(m =>m.MusteriId)
+<table style="width:70%">
+    @*dropdown koyulacak*@
+  <tr>
+         @*   <th> Musteri Ad:  </th> 
+            <td>        
+               @(((Musteri)ViewData["musteri"]).MusteriAd)
+            
+            </td>*@
+  </tr>
+  <tr>
+            <th> Personel Ad:</th> 
+            <td>        
+                @Html.DropDownList("PersonelId",null,"Seçiniz", new {@class="form-control" })
+            
+            </td>
+   </tr>
+   <tr>
+            <th> Operasyon Ad:</th> 
+            <td>        
+                @Html.DropDownList("OperasyonId",null,"Seçiniz", new {@class="form-control" })
+            
+            </td>
+   </tr>
+  <tr>
+            <th> Salon Ad:</th> 
+            <td>        
+                @Html.DropDownList("SalonId",null,"Seçiniz", new {@class="form-control" })
+            
+            </td>
+  </tr>
+  <tr>      <th> Saat:</th> 
+            <td>        
+               
+                @Html.DropDownList("SaatId",null,"Seçiniz", new {@class="form-control" })
+            
+            </td>
+   </tr>
+  <tr>      <th> Tarih:</th> 
+            <td>        
+             <input type="date" asp-for="Tarih" />
+            </td>
+  </tr>
+
+</table>
+
+@ViewBag.Mesaj
+  <br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

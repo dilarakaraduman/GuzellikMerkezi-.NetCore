@@ -1,0 +1,17 @@
+﻿
+@ViewBag.Mesaj
+<form asp-controller="Home" asp-action="Giris" method="post">
+
+	<table style="width:70%">
+		<tr>
+			<th> Mail: </th>
+			<td><input name="email" type="text" />
+				</td>
+		</tr>
+		<tr>
+			<th> Parola :</th>
+			<td> <input name="parola" type="text" /></td>
+		</tr>
+	</table>
+<br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

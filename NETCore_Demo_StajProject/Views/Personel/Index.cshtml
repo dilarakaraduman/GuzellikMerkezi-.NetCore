@@ -1,0 +1,44 @@
+﻿@model List<NETCore_Demo_StajProject.DAL.Personel>
+
+@{
+    Layout="_LayoutAdmin";
+}
+
+<a class="btn btn-info" href="Personel\Create"> + Ekle</a>
+<a class="btn btn-info" href="\Gorev\Index"> Görev Listesini Görüntüle</a>
+<a class="btn btn-info" href="\UzmanlikAlanlari\Index"> Uzmanlık Alanları Listesini Görüntüle</a>
+<table class="table">
+    <thead>
+           <tr>       
+             <th>ID</th>
+             <th>Personel Adı</th>
+             <th>PersonelSoyad</th> 
+             <th>PersonelCinsiyet</th>
+             <th>PersonelMail</th> 
+             <th>PersonelParola</th>
+             <th>PersonelTel</th>
+             <th>EkiplideriId</th>
+           </tr>
+
+    </thead>
+    @foreach(var item in Model){
+         <tr>
+            <td>@item.PersonelId</td> 
+            <td>@item.PersonelAd</td>
+            <td>@item.PersonelSoyad</td> 
+            <td>@item.PersonelCinsiyet</td>
+            <td>@item.PersonelMail</td> 
+            <td>@item.PersonelParola</td>
+            <td>@item.PersonelTel</td>
+            <td>@item.EkiplideriId</td>
+
+            <td><a class="btn btn-info" href="Personel\Edit\@item.PersonelId"> + Düzenle</a>&nbsp
+                <a class="btn btn-info" href="Personel\Remove\@item.PersonelId">Sil</a>
+                <a class="btn btn-info" href="\Personel\PersonelGorevleri\@item.PersonelId">Gorev</a>
+                <a class="btn btn-info" href="\Personel\PersonelAlanlari\@item.PersonelId">Uzmanlık ALanları</a>
+
+                  </td>
+         </tr>
+}
+</table>
+

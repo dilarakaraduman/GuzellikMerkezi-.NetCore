@@ -1,0 +1,16 @@
+﻿@model NETCore_Demo_StajProject.DAL.Operasyonlar
+@{
+    Layout = "_LayoutAdmin";
+}
+<form asp-controller="Operasyonlar" asp-action="Edit" method="post">
+    @Html.HiddenFor(m=>m.OperasyonId)
+<table style="width:70%">
+
+  <tr>
+          <th> Operasyonlar Ad:</th> 
+            <td><input asp-for="OperasyonAd" />                </td>
+
+  </tr>
+</table>
+  <br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

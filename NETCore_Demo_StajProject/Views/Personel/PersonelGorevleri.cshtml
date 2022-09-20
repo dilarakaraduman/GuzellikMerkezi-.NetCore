@@ -1,0 +1,28 @@
+﻿@model List<NETCore_Demo_StajProject.Models.PersonelGorevVM>
+@{
+    Layout="_LayoutAdmin";
+}
+
+<a class="btn btn-info" href="/PersonelGorev/PersonelCreate/@ViewBag.PersonelId">+Gorev Ekle</a>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Personel Ad</th>
+			<th>Gorev Adı</th>
+		</tr>
+
+	</thead>
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>@item.Personel.PersonelAd</td>
+			<td>@item.Gorev.GorevAd</td>
+
+			
+			<td>
+				<a class="btn btn-info" href="/PersonelGorev/Remove/@item.PersonelGorev.PersonelGorevId">Sil</a>
+			
+			</td>
+		</tr>
+	}
+</table>

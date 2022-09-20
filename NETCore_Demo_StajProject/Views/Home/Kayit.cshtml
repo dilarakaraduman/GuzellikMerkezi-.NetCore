@@ -1,0 +1,38 @@
+﻿@model NETCore_Demo_StajProject.DAL.Musteri
+
+<form asp-controller="Musteri" asp-action="Create" method="post">
+
+<table style="width:70%">
+
+  <tr>
+          <th> Musteri Ad:</th> 
+            <td><input asp-for="MusteriAd" />                </td>
+  </tr>
+  <tr>  
+            <th> Musteri Soyad: </th>
+             <td> <input asp-for="MusteriSoyad" />           </td>
+  </tr>
+  <tr>  
+             <th> Musteri Cinsiyet: </th>
+              <td> <input asp-for="MusteriCinsiyet" />       </td>
+  </tr>
+  <tr>  
+             <th> Musteri Tel: </th>
+              <td> <input asp-for="MusteriTel" />            </td>
+  </tr>
+   <tr>  
+             <th> Musteri Mail: </th>
+              <td> <input asp-for="MusteriMail" />           </td>
+  </tr>
+  <tr>  
+             <th> Musteri Parola :</th>
+              <td> <input asp-for="MusteriParola" />         </td>
+  </tr>
+  <tr>  
+             <th> Doğum Tarihi :</th>
+              <td> <input asp-for="MusteriDogumtarihi" />           </td>
+  </tr>
+  
+</table>
+  <br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

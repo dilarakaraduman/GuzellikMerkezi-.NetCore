@@ -1,0 +1,9 @@
+﻿@model List<NETCore_Demo_StajProject.Models.Urun>
+@{
+    Layout = "_LayoutAdmin";
+}
+
+<h2>Ürünler Index Sayfası</h2> 
+@foreach(var item in Model){
+    @item.Ad<br />
+}
