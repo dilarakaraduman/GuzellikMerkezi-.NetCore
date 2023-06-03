@@ -22,5 +22,6 @@ namespace NETCore_Demo_StajProject.Views
             var personel = JsonSerializer.Deserialize<Personel>(personelSesion);
             return personel;
         }
+    
     }
 }

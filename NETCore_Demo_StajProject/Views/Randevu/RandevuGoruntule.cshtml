@@ -16,11 +16,11 @@
 	@foreach (var item in Model)
 	{
 	<tr>
-
 	<td>@item.Musteri.MusteriAd</td>
 	<td>@item.Operasyonlar.OperasyonAd</td>
 	<td>@item.Personel.PersonelAd</td>
 	<td>@(item.Randevu.Tarih.ToShortDateString())</td>
+	<td>@item.Saat.SaatNo</td>
 	<td>@item.Salon.SalonNo</td>
 	</tr>
 	}

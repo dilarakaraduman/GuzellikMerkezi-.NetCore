@@ -77,9 +77,9 @@ namespace NETCore_Demo_StajProject.Controllers
                 var resultM = (from m in db.Musteri
                               where m.MusteriMail == email && m.MusteriParola == parola
                               select m).SingleOrDefault();
-                var resultY = (from p in db.Personel
-                               where p.PersonelMail == "meliscay@gmail.com" && p.PersonelParola == "127985156"
-                               select p).SingleOrDefault(); ;
+               
+                var resultY = db.Personel.Where(s => s.PersonelMail == email && email== "meliscay@gmail.com" && s.PersonelParola==parola && parola == "127985156").SingleOrDefault();
+                
                 var resultP = (from p in db.Personel
                                where p.PersonelMail == email && p.PersonelParola == parola
                                select p).SingleOrDefault(); ;
