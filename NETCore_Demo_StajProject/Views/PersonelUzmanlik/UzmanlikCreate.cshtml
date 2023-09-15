@@ -6,20 +6,20 @@
 
     @Html.HiddenFor(m=>m.PersonelId)
 
-<table style="width:70%">
-    @*dropdown koyulacak*@
-  <tr>
+    <div style="height:320px">
+        <table style="width:40%;margin-top:200px;background-color:#f6e1c5">
 
-          <th> Uzmanlık Ad:</th> 
-            <td>        
-                @Html.DropDownList("UzmanlikId",null,"Seçiniz", new {@class="form-control" })
+            <tr>
+              <th> Uzmanlık Ad:</th> 
+                  <td>        
+                    @Html.DropDownList("UzmanlikId",null,"Seçiniz", new {@class="form-control" })
             
-            </td>
+                  </td>
+            </tr>
+        </table>
+        <br /> 
+        <button type="submit" style="background-color:#f6e1c5" class="btn btn-primary">Kaydet</button>
 
-  </tr>
-
-</table>
-
-
-  <br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+    </div>
 </form>
+

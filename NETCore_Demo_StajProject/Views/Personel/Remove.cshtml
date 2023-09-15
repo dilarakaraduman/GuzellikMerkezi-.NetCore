@@ -3,9 +3,11 @@
     Layout="_LayoutAdmin";
 }
 <form asp-controller="Personel" asp-action="Remove" method="post">
+    @Html.HiddenFor(m=>m.PersonelId)
 
-    <input type="hidden" asp-for="PersonelId" />
-    <input  asp-for="PersonelAd" />
+      <div class="text-center"style="height:400px;margin-top:230px;">
+         <button type="submit" style="height:25%;width:15%;background-color:#f6e1c5" class="btn btn-primary">Sil</button>
 
-    <button type="submit" class="btn btn-primary">Sil</button>
+
+    </div>
 </form>

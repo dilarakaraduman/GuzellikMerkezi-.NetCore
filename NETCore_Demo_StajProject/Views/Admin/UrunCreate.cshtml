@@ -1,0 +1,29 @@
+﻿@model NETCore_Demo_StajProject.DAL.Urun
+@{
+	Layout = "_LayoutAdmin";
+}
+<form asp-controller="Admin" asp-action="UrunCreate" method="post">
+<div style="height:280px">
+		<table style="width:70%;margin-top:200px">
+
+			<tr>
+				<th> Urun Ad:</th>
+				<td><input asp-for="Ad" />                </td>
+			</tr>
+			<tr>
+				<th> Fiyat </th>
+				<td> <input asp-for="Fiyat"/>           </td>
+			</tr>
+			<tr>
+				<th> Resim: </th>
+				<td> <input asp-for="ResimAd" />       </td>
+			</tr>
+			<tr>
+				<th> Açıklama</th>
+				<td> <input asp-for="Detay" />            </td>
+			</tr>
+		</table>
+		<br />  <button type="submit" style="width:20%;background-color:#f6e1c5" class="btn btn-primary">Kaydet</button>
+</div>
+
+</form>

@@ -1,0 +1,123 @@
+﻿@model NETCore_Demo_StajProject.DAL.Randevu
+@using NETCore_Demo_StajProject.DAL
+
+
+<form asp-controller="Admin" asp-action="RandevuEdit" method="post">
+
+    @Html.HiddenFor(m =>m.RandevuId)
+    <table style="width:70%;height:270px">
+
+        <tr>
+            <th> Musteri Ad:</th>
+            <td>
+                @Html.DropDownList("MusteriId",null,"Seçiniz", new {@class="form-control" })
+
+            </td>
+        </tr>
+        <tr>
+            <th> Personel Ad:</th>
+            <td>
+                @Html.DropDownList("PersonelId",null,"Seçiniz", new {@class="form-control" })
+
+            </td>
+        </tr>
+        <tr>
+            <th> Operasyon Ad:</th>
+            <td>
+                @Html.DropDownList("OperasyonId",null,"Seçiniz", new {@class="form-control" })
+
+            </td>
+        </tr>
+        <tr>
+            <th> Salon Ad:</th>
+            <td>
+                @Html.DropDownList("SalonId",null,"Seçiniz", new {@class="form-control" })
+
+            </td>
+        </tr>
+        <tr>
+            <th> Saat:</th>
+            <td>
+
+                @Html.DropDownList("saatId",null,"Seçiniz", new {@class="form-control" })
+
+            </td>
+        </tr>
+        <tr>
+            <th> Tarih:</th>
+            <td>
+                <input type="date" asp-for="Tarih" />
+            </td>
+        </tr>
+
+    </table>
+    <br />  <button type="submit" style="width:20%;background-color:#f6e1c5" class="btn btn-primary">Kaydet</button>
+</form>
+@if (TempData["ErrorMessage"] != null || TempData["ErrorMessage1"] != null)
+{
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div id="errorMessage" class="alert alert-danger custom-alert">
+            <div class="alert-content">
+                @TempData["ErrorMessage"]
+            </div>
+        </div>
+    }
+    else
+    {
+        <div id="errorMessage1" class="alert alert-danger custom-alert">
+            <div class="alert-content">
+                @TempData["ErrorMessage1"]
+            </div>
+        </div>
+    }
+    <style>
+        .custom-alert {
+            /* Add custom CSS properties to adjust the size and center the element */
+            margin-top: 20px;
+            width: 300px; /* Adjust the width as needed */
+            height: 20px; /* Adjust the height as needed */
+            font-size: 13px; /* Adjust the font size as needed */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Add any other custom styling as desired */
+        }
+
+        .alert-content {
+            text-align: center;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var errorMessage = document.getElementById('errorMessage');
+            var errorMessage = document.getElementById('errorMessage1');
+            var fadeOutDelay = 3000; // 3000ms = 3 seconds
+            var fadeOutDuration = 1000; // 1000ms = 1 seconds (adjust as needed)
+
+            setTimeout(function () {
+                fadeOut(errorMessage, fadeOutDuration);
+            }, fadeOutDelay);
+            setTimeout(function () {
+                fadeOut(errorMessage1, fadeOutDuration);
+            }, fadeOutDelay);
+
+            function fadeOut(element, duration) {
+                var opacity = 1;
+                var intervalTime = duration / 100; // Adjust the division value to control the speed
+
+                var interval = setInterval(function () {
+                    if (opacity > 0) {
+                        opacity -= 0.01; // Adjust the decrement value to control the speed
+                        element.style.opacity = opacity;
+                    } else {
+                        clearInterval(interval);
+                        element.style.display = 'none';
+                    }
+                }, intervalTime);
+            }
+        });
+    </script>
+}
+}

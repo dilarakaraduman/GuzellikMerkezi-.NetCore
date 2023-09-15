@@ -1,0 +1,31 @@
+﻿@model List<NETCore_Demo_StajProject.Models.RandevuVM>
+@{
+	Layout = "_LayoutPersonel";
+}
+<form asp-controller="Personel" asp-action="AktifRandevular" method="post">
+
+	<table class="table" style="width:100%;height:220px;background-color:#FDF5E6">
+		<thead>
+			<tr>
+				<th>Müşteri  Adı</th>
+				<th>Operasyon Adı</th>
+				<th>Tarih:</th>
+				<th>Saat:</th>
+				<th>Salon:</th>
+
+			</tr>
+
+		</thead>
+		@foreach (var item in Model)
+		{
+			<tr style="width:100%;background-color:#FFEBCD">
+				<td>@item.Musteri.MusteriAd</td>
+				<td>@item.Operasyonlar.OperasyonAd</td>
+				<td>@(item.Randevu?.Tarih.ToShortDateString())</td>
+				<td>@(item.Randevu?.saatId)</td>
+				<td>@item.Salon.SalonNo</td>
+
+			</tr>
+		}
+	</table>
+</form>

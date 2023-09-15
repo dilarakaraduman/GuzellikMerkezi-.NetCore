@@ -2,22 +2,14 @@
 using NETCore_Demo_StajProject.App_Filter;
 using NETCore_Demo_StajProject.DAL;
 using NETCore_Demo_StajProject.Models;
+using NETCore_Demo_StajProject.Views;
 
 namespace NETCore_Demo_StajProject.Controllers.Personeller
 {
     public class PersonelController : Controller
     {
-        [LoginFilter]
-        #region Listeleme
-        public IActionResult Index()
-        {
-            DataBaseContext db = new DataBaseContext();
-            var r = db.Personel.ToList();
-            return View(r);
 
-        }
-        #endregion
-        [LoginFilter]
+
         #region Yeni Kayıt
         [LoginFilter]
         public IActionResult Create()
@@ -43,8 +35,9 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
             return View();
         }
         #endregion
-        [LoginFilter]
+
         #region Kayıt Güncelleme
+        [LoginFilter]
         public IActionResult Edit(int id)
         {
             DataBaseContext db = new DataBaseContext();
@@ -58,12 +51,13 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
             DataBaseContext db = new DataBaseContext();
             db.Personel.Update(model);
             db.SaveChanges();
-            return View();
+			return RedirectToAction("Index", "Personel");
 
-        }
+		}
         #endregion
-        [LoginFilter]
+
         #region Kayıt Silme
+        [LoginFilter]
         public IActionResult Remove(int id)
         {
             DataBaseContext db = new DataBaseContext();
@@ -77,13 +71,14 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
             DataBaseContext db = new DataBaseContext();
             db.Personel.Remove(model);
             db.SaveChanges();
-            return RedirectToAction("Index");
+			return RedirectToAction("Index", "Personel");
 
-        }
+		}
 
         #endregion
-        [LoginFilter]
+
         #region PersonelGorevleri
+        [LoginFilter]
         public IActionResult PersonelGorevleri(int id)
         {
             ViewBag.PersonelId = id;
@@ -107,8 +102,9 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
 
         }
         #endregion
-        [LoginFilter]
+
         #region PersonelAlanlari
+        [LoginFilter]
         public IActionResult PersonelAlanlari(int id)
         {
             ViewBag.PersonelId = id;
@@ -132,5 +128,66 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
 
         }
         #endregion
+
+        #region Geçmiş Randevular
+        [LoginFilter]
+		public IActionResult GecmisRandevular()
+		{
+			var personel = ProgramUtility.GetPersonel(HttpContext);
+			ViewData["personel"] = personel;
+
+			using (DataBaseContext db = new DataBaseContext())
+			{
+				var r = (from randevu in db.Randevu
+						 join s in db.Salon on randevu.SalonId equals s.SalonId
+						 join p in db.Personel on randevu.PersonelId equals p.PersonelId
+						 join m in db.Musteri on randevu.MusteriId equals m.MusteriId
+						 join op in db.Operasyonlar on randevu.OperasyonId equals op.OperasyonId
+						 where randevu.PersonelId == personel.PersonelId && randevu.Tarih < DateTime.Now
+						 select new RandevuVM()
+						 {
+							 Randevu = randevu,
+							 Salon = s,
+							 Musteri = m,
+							 Personel = p,
+							 Operasyonlar = op
+						 }).ToList();
+
+				return View(r);
+			}
+		}
+        #endregion
+
+        #region Aktif Randevular
+        [LoginFilter]
+		public IActionResult AktifRandevular()
+		{
+			var personel = ProgramUtility.GetPersonel(HttpContext);
+			ViewData["personel"] = personel;
+
+			using (DataBaseContext db = new DataBaseContext())
+			{
+				var r = (from randevu in db.Randevu
+						 join s in db.Salon on randevu.SalonId equals s.SalonId
+						 join p in db.Personel on randevu.PersonelId equals p.PersonelId
+						 join m in db.Musteri on randevu.MusteriId equals m.MusteriId
+						 join op in db.Operasyonlar on randevu.OperasyonId equals op.OperasyonId
+						 where randevu.PersonelId == personel.PersonelId && randevu.Tarih > DateTime.Now
+						 select new RandevuVM()
+						 {
+							 Randevu = randevu,
+							 Salon = s,
+							 Musteri = m,
+							 Personel = p,
+							 Operasyonlar = op
+						 }).ToList();
+
+				return View(r);
+			}
+		}
+        #endregion
+
+
+
     }
 }

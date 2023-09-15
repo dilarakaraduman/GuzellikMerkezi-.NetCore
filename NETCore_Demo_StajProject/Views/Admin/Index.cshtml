@@ -1,0 +1,43 @@
+﻿@model List<NETCore_Demo_StajProject.DAL.Musteri>
+@{
+    Layout = "_LayoutAdmin";
+}
+   <a class="btn btn-info" style="background-color:#f6e1c5;margin-top:10px" href="\Admin\MusteriCreate"> Ekle</a>
+  <a class="btn btn-info" style="background-color:#f6e1c5;margin-top:10px" href="\Operasyonlar\Index"> Operasyonlar Listesini Görüntüle</a>
+    <table class="table;style="margin-top:30px;">
+        <thead>
+            <tr style="background-color:#FDF5E6;width:100%">
+                <th>ID</th>
+                <th>Musteri Adı</th>
+                <th>Musteri Soyad</th>
+                <th>Musteri Cinsiyet</th>
+                <th>Musteri Mail</th>
+                <th>Musteri Parola</th>
+                <th>Musteri Telefon</th>
+                <th>Doğum Tarihi</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+        {
+            <tr style="background-color:#FFEBCD">
+                <td>@item.MusteriId</td>
+                <td>@item.MusteriAd</td>
+                <td>@item.MusteriSoyad</td>
+                <td>@item.MusteriCinsiyet</td>
+                <td>@item.MusteriMail</td>
+                <td>@item.MusteriParola</td>
+                <td>@item.MusteriTel</td>
+                <td>@item.MusteriDogumtarihi</td>
+
+                <td>
+                    <a class="btn btn-info" style="width:70%;background-color:#f6e1c5" href="\Admin/MusteriEdit/@item.MusteriId">Düzenle</a>&nbsp
+                    <a class="btn btn-info" style="width:25%;background-color:#f6e1c5" href="\Admin/Remove/@item.MusteriId">Sil</a>
+                    <a class="btn btn-info" style="width:70%;background-color:#f6e1c5" href="\Admin/MusteriRandevuGoruntule/@item.MusteriId">Randevu</a>
+                </td>
+            </tr>
+
+        }
+    </table>
+

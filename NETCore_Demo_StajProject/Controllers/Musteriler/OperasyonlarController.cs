@@ -7,17 +7,19 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
 {
     public class OperasyonlarController : Controller
     {
-       
+        #region Operasyonlar Listele
+        DataBaseContext db = new DataBaseContext();
         public IActionResult Index()
         {
-            DataBaseContext db = new DataBaseContext();
+            
             var r = db.Operasyonlar.ToList();
             return View(r);
 
         }
-        [LoginFilter]
-        #region Yeni Kayıt
+        #endregion
 
+        #region Yeni Kayıt
+        [LoginFilter]
         public IActionResult Create()
         {
             return View();
@@ -29,10 +31,12 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
             try
             {
                 DataBaseContext db = new DataBaseContext();
-
-                db.Operasyonlar.Add(model);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (model != null) {
+                    db.Operasyonlar.Add(model);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+               
             }
             catch (Exception ex)
             {
@@ -41,8 +45,9 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
             return View();
         }
         #endregion
-        [LoginFilter]
+
         #region Kayıt Güncelleme
+        [LoginFilter]
         public IActionResult Edit(int id)
         {
             DataBaseContext db = new DataBaseContext();
@@ -56,12 +61,13 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
             DataBaseContext db = new DataBaseContext();
             db.Operasyonlar.Update(model);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Index","Operasyonlar");
 
         }
         #endregion
-        [LoginFilter]
+
         #region Kayıt Silme
+        [LoginFilter]
         public IActionResult Remove(int id)
         {
             DataBaseContext db = new DataBaseContext();
@@ -72,10 +78,17 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
         [ActionName("Remove")]
         public IActionResult RemovePost(Operasyonlar model)
         {
-            DataBaseContext db = new DataBaseContext();
-            db.Operasyonlar.Remove(model);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+				db.Operasyonlar.Remove(model);
+				db.SaveChanges();
+				return RedirectToAction("Index");
+			}
+            catch
+            {
+				TempData["ErrorMessage2"] = "İlk önce müşterinin ve personelin randevularını silin";
+				return RedirectToAction("Remove");
+			}
 
         }
 

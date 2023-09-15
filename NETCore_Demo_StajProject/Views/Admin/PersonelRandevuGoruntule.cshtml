@@ -1,0 +1,35 @@
+﻿@model List<NETCore_Demo_StajProject.Models.RandevuVM>
+
+<form asp-controller="Admin" asp-action="PersonelRandevuGoruntule" method="post">
+
+	<table class="table" style="width:100%;height:350px;background-color:#FDF5E6">
+		<thead>
+			<tr>
+				<th>Operasyon Adı</th>
+				<th>Müşteri Adı</th>
+				<th>Tarih:</th>
+				<th>Saat:</th>
+				<th>Salon:</th>
+
+
+			</tr>
+
+		</thead>
+		@foreach (var item in Model)
+		{
+			<tr style="width:100%;background-color:#FFEBCD">
+				<td>@item.Operasyonlar.OperasyonAd</td>
+				<td>@item.Musteri.MusteriAd</td>
+				<td>@(item.Randevu?.Tarih.ToShortDateString())</td>
+				<td>@(item.Randevu?.saatId)</td>
+				<td>@item.Salon.SalonNo</td>
+				<td>
+					<a class="btn btn-info" style="width:30%;background-color:#f6e1c5" href="\Randevu/Edit/@item.Randevu.RandevuId">Düzenle</a>
+					<a class="btn btn-info" style="width:25%;background-color:#f6e1c5" href="\Randevu/Remove/@item.Randevu.RandevuId">Sil</a>
+
+				</td>
+
+			</tr>
+		}
+	</table>
+</form>

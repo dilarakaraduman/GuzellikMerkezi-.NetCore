@@ -1,0 +1,35 @@
+﻿@model List<NETCore_Demo_StajProject.DAL.Urun>
+
+<a class="btn btn-info" style="background-color:#f6e1c5;margin-top:10px" href="\Admin/UrunCreate/@ViewBag.Id">Yeni Ürün Ekle</a>
+<div>
+    <table class="table" style="margin-top:10px;width:100%;background-color:#FDF5E6">
+	<thead style="background-color:#FFEBCD">
+		<tr>
+			<th>Ürün Adı</th>
+			<th>Ürün Fiyatı</th>
+			<th>Ürün Resim</th>
+			<th>Ürün Açıklama</th>
+			<th></th>
+		</tr>
+
+	</thead>
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td style="width:15%">@item.Ad</td>
+			<td style="width:10%">@item.Fiyat</td>
+			<td>
+				<img src="@item.ResimAd"
+				 style="width:80px;height:100px" alt="Ürün Resmi">
+			</td>
+			<td style="width:50%">@item.Detay</td>
+			<td>
+				<a class="btn btn-info" style="width:50%;background-color:#f6e1c5" href="\Admin/UrunEdit/@item.Id">Düzenle</a>
+				<a class="btn btn-info" style="width:25%;background-color:#f6e1c5" href="\Admin/UrunRemove/@item.Id">Sil</a>
+			</td>
+				
+
+		</tr>
+	}
+</table>
+</div>

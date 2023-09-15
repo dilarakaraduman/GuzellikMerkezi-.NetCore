@@ -2,22 +2,79 @@
 @{
     Layout = "_LayoutAdmin";
 }
-<a class="btn btn-info" asp-action="create" asp-controller="UzmanlikAlanlari">+Ekle</a>
+<a class="btn btn-info" style="background-color:#f6e1c5;margin-top:10px" asp-action="create" asp-controller="UzmanlikAlanlari">Yeni Uzmanlık Alanı Ekle</a>
 
-<table class="table">
-    <thead>
+<div style="height:700px">
+    <table class="table" style="margin-top:30px">
+        <thead style="width:100%;background-color:#FDF5E6">
            <tr>       
-             <th>ID</th>
-             <th>UzmanlikAlanlari Adı</th>           
+             <th>Id</th>
+             <th>Uzmanlık Alanları Adı</th>  
+             <th></th>
            </tr>
 
     </thead>
     @foreach(var item in Model){
-         <tr>
+            <tr style="width:100%;background-color:#FFEBCD">
             <td>@item.UzmanlikId</td> 
             <td>@item.UzmanlikAd</td>
-              <td><a class="btn btn-info" href="Edit\@item.UzmanlikId"> + Düzenle</a>&nbsp
-                <a class="btn btn-info" href="Remove\@item.UzmanlikId">Sil</a></td>
+              <td><a class="btn btn-info" style="width:30%;background-color:#f6e1c5" href="/UzmanlikAlanlari\Edit\@item.UzmanlikId">Düzenle</a>&nbsp
+                    <a class="btn btn-info" style="width:30%;background-color:#f6e1c5" href="/UzmanlikAlanlari\Remove\@item.UzmanlikId">Sil</a>
+                </td>
          </tr>
 }
 </table>
+</div>
+@if (TempData["ErrorMessage2"] != null)
+{
+    <div id="errorMessage2" class="alert alert-danger custom-alert">
+        <div class="alert-content">
+            @TempData["ErrorMessage2"]
+        </div>
+    </div>
+}
+<style>
+    .custom-alert {
+        /* Add custom CSS properties to adjust the size and center the element */
+        margin-top: 20px;
+        width: 300px; /* Adjust the width as needed */
+        height: 20px; /* Adjust the height as needed */
+        font-size: 13px; /* Adjust the font size as needed */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* Add any other custom styling as desired */
+    }
+
+    .alert-content {
+        text-align: center;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var errorMessage = document.getElementById('errorMessage2');
+        var fadeOutDelay = 3000; // 3000ms = 3 seconds
+        var fadeOutDuration = 1000; // 1000ms = 1 seconds (adjust as needed)
+
+        setTimeout(function () {
+            fadeOut(errorMessage2, fadeOutDuration);
+        }, fadeOutDelay);
+
+        function fadeOut(element, duration) {
+            var opacity = 1;
+            var intervalTime = duration / 100; // Adjust the division value to control the speed
+
+            var interval = setInterval(function () {
+                if (opacity > 0) {
+                    opacity -= 0.01; // Adjust the decrement value to control the speed
+                    element.style.opacity = opacity;
+                } else {
+                    clearInterval(interval);
+                    element.style.display = 'none';
+                }
+            }, intervalTime);
+        }
+    });
+</script>
+

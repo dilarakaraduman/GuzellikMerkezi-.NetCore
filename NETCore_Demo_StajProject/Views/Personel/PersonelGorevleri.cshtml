@@ -3,26 +3,29 @@
     Layout="_LayoutAdmin";
 }
 
-<a class="btn btn-info" href="/PersonelGorev/PersonelCreate/@ViewBag.PersonelId">+Gorev Ekle</a>
-<table class="table">
-	<thead>
-		<tr>
-			<th>Personel Ad</th>
-			<th>Gorev Adı</th>
-		</tr>
+<a class="btn btn-info" style="background-color:#f6e1c5;margin-top:10px"  href="/PersonelGorev/PersonelCreate/@ViewBag.PersonelId">Yeni Görev Ata</a>
+<div style="height:440px">
+	<table class="table" style=" margin-top:30px">
+		<thead style="width:100%;background-color:#FDF5E6">
+			<tr>
+				<th>Personel Ad</th>
+				<th>Gorev Adı</th>
+				<th></th>
+			</tr>
 
-	</thead>
-	@foreach (var item in Model)
-	{
-		<tr>
-			<td>@item.Personel.PersonelAd</td>
-			<td>@item.Gorev.GorevAd</td>
+		</thead>
+		@foreach (var item in Model)
+		{
+			<tr style="width:100%;background-color:#FFEBCD">
+				<td>@item.Personel.PersonelAd</td>
+				<td>@item.Gorev.GorevAd</td>
 
-			
-			<td>
-				<a class="btn btn-info" href="/PersonelGorev/Remove/@item.PersonelGorev.PersonelGorevId">Sil</a>
-			
-			</td>
-		</tr>
-	}
-</table>
+
+				<td>
+					<a class="btn btn-info" style="width:30%;background-color:#f6e1c5" href="/PersonelGorev/Remove/@item.PersonelGorev.PersonelGorevId">Sil</a>
+
+				</td>
+			</tr>
+		}
+	</table>
+</div>

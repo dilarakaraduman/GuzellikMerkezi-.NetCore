@@ -1,9 +1,24 @@
-﻿@model List<NETCore_Demo_StajProject.Models.Urun>
-@{
-    Layout = "_LayoutAdmin";
-}
+﻿@model List<NETCore_Demo_StajProject.DAL.Urun>
 
-<h2>Ürünler Index Sayfası</h2> 
-@foreach(var item in Model){
-    @item.Ad<br />
-}
+<table class="table" style="background-color:#FDF5E6">
+	<thead style="background-color:#FFEBCD">
+		<tr>
+			<th>Ürün Adı</th>
+			<th>Ürün Fiyatı</th>
+			<th>Ürün Resim</th>
+			<th>Ürün Açıklama</th>
+		</tr>
+
+	</thead>
+	@foreach (var item in Model)
+	{
+				<tr>
+					<td>@item.Ad</td>
+					<td>@item.Fiyat</td>
+					<td><img src="@item.ResimAd" 
+						style="width:80px;height:100px"alt="Ürün Resmi"></td>
+					<td>@item.Detay</td>
+					
+				</tr>
+	}
+</table>
