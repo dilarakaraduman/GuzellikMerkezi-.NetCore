@@ -1,4 +1,4 @@
-# NETCore_Demo_StajProject
+# NETCore_Project
 1.Müşteri ve personeller sisteme giriş yapabilir.
 2.Müşteri ve personeller sisteme kaydolabilir.
 3.Müşteriler randevu oluşturabilir.
