@@ -12,7 +12,7 @@ namespace NETCore_Demo_StajProject.DAL
         public int PersonelId { get; set;}
         public DateTime Tarih { get; set; }
         public int saatId { get; set; }
-        public int UzmanlikId { get; set; }
+        //public int UzmanlikId { get; set; }
         public int OperasyonId { get; set; }
 
 	}

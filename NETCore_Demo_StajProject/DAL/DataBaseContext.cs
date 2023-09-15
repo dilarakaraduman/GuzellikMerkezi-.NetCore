@@ -14,6 +14,7 @@ namespace NETCore_Demo_StajProject.DAL
         public DbSet<Randevu> Randevu { get; set; }
         public DbSet<Salon> Salon { get; set; }
         public DbSet<Saat> Saat { get; set; }
+        public DbSet<Urun> Urun { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=DILARA;Database=Dbo_guzellikMerkezi;Trusted_Connection=True;Encrypt=False");

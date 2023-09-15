@@ -2,9 +2,10 @@
 @{
     Layout = "_LayoutAdmin";
 }
-<a class="btn btn-info" asp-action="create" asp-controller="Operasyonlar">+Ekle</a>
+<div style="height:620px">
+    <a class="btn btn-info" style="width:40%;margin-top:20px;background-color:#f6e1c5" asp-action="create" asp-controller="Operasyonlar">Yeni Operasyon Ekle</a>
 
-<table class="table">
+<table class="table" style="width:100%;margin-top:30px;background-color:#FDF5E6">
     <thead>
            <tr>       
              <th>Operasyon Id</th>
@@ -13,12 +14,15 @@
 
     </thead>
     @foreach(var item in Model){
-         <tr>
+        <tr style="width:100%;background-color:#FFEBCD">
             <td>@item.OperasyonId</td> 
             <td>@item.OperasyonAd</td>
             <td>
-                <a class="btn btn-info" style="width:20%;background-color:#f6e1c5" href="Edit\@item.OperasyonId"> + Düzenle</a>&nbsp
-                <a class="btn btn-info" style="width:20%;background-color:#f6e1c5" href="Remove\@item.OperasyonId">Sil</a></td>
+                <a class="btn btn-info" style="width:30%;background-color:#f6e1c5" href="/Operasyonlar\Edit\@item.OperasyonId">Düzenle</a>&nbsp
+                    <a class="btn btn-info" style="width:20%;background-color:#f6e1c5" href="/Operasyonlar\Remove\@item.OperasyonId">Sil</a>
+                </td>
          </tr>
 }
 </table>
+
+</div>

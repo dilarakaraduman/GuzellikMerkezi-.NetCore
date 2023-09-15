@@ -4,5 +4,60 @@
 }
 <form asp-controller="PersonelUzmanlik" asp-action="Remove" method="post">
     @Html.HiddenFor(m=>m.PersonelId)
-    <button type="submit" style="width:20%;background-color:#f6e1c5" class="btn btn-primary">Sil</button>
+    <div class="text-center" style="height:270px;margin-top:250px;">
+
+        <button type="submit" style="height:25%;width:15%;background-color:#f6e1c5" class="btn btn-primary">Sil</button>
+    </div>
 </form>
+@if (TempData["ErrorMessage2"] != null)
+{
+    <div id="errorMessage2" class="alert alert-danger custom-alert">
+        <div class="alert-content">
+            @TempData["ErrorMessage2"]
+        </div>
+    </div>
+}
+<style>
+    .custom-alert {
+        /* Add custom CSS properties to adjust the size and center the element */
+        margin-top: 20px;
+        width: 300px; /* Adjust the width as needed */
+        height: 20px; /* Adjust the height as needed */
+        font-size: 13px; /* Adjust the font size as needed */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* Add any other custom styling as desired */
+    }
+
+    .alert-content {
+        text-align: center;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var errorMessage = document.getElementById('errorMessage2');
+        var fadeOutDelay = 3000; // 3000ms = 3 seconds
+        var fadeOutDuration = 1000; // 1000ms = 1 seconds (adjust as needed)
+
+        setTimeout(function () {
+            fadeOut(errorMessage2, fadeOutDuration);
+        }, fadeOutDelay);
+
+        function fadeOut(element, duration) {
+            var opacity = 1;
+            var intervalTime = duration / 100; // Adjust the division value to control the speed
+
+            var interval = setInterval(function () {
+                if (opacity > 0) {
+                    opacity -= 0.01; // Adjust the decrement value to control the speed
+                    element.style.opacity = opacity;
+                } else {
+                    clearInterval(interval);
+                    element.style.display = 'none';
+                }
+            }, intervalTime);
+        }
+    });
+</script>

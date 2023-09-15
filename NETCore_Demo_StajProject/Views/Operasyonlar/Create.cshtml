@@ -3,18 +3,20 @@
     Layout = "_LayoutAdmin";
 }
 <form asp-controller="Operasyonlar" asp-action="Create" method="post">
+<div style="height:300px">
+        <table style="width:70%;background-color:#f6e1c5;margin-top:200px">
 
-<table style="width:70%">
-
-  <tr>
-          <th> Operasyon Ad:</th> 
+            <tr>
+                <th> Operasyon Ad:</th>
                 <td><input asp-for="OperasyonAd" />                </td>
-          <th> Seans sayisi</th> 
+                <th> Seans Sayısı</th>
                 <td><input asp-for="Seans_sayisi" />                </td>
-          <th> Tutar</th> 
+                <th> Tutar</th>
                 <td><input asp-for="Tutar" />                </td>
 
-  </tr>
-</table>
-    <br />  <button type="submit" style="width:20%;background-color:#f6e1c5" class="btn btn-primary">Kaydet</button>
+            </tr>
+        </table>
+        <br />  <button type="submit" style="width:20%;background-color:#f6e1c5" class="btn btn-primary">Kaydet</button>
+</div>
+
 </form>

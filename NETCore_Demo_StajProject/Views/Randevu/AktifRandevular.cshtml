@@ -2,7 +2,7 @@
  
 <form asp-controller="Randevu" asp-action="AktifRandevular" method="post">
 
-<table class="table">
+	<table class="table" style="width:100%;height:180px;background-color:#FDF5E6">
 	<thead>
 		<tr>
 			<th>Operasyon Adı</th>
@@ -17,15 +17,15 @@
 	</thead>
 	@foreach (var item in Model)
 	{
-		<tr>
+			<tr style="width:100%;background-color:#FFEBCD">
 			<td>@item.Operasyonlar.OperasyonAd</td>
 			<td>@item.Personel.PersonelAd</td>
 			<td>@(item.Randevu?.Tarih.ToShortDateString())</td>
 			<td>@(item.Randevu?.saatId)</td>
 			<td>@item.Salon.SalonNo</td>
 				<td>
-					<a class="btn btn-info" style="width:20%;background-color:#f6e1c5" href="/Randevu/Edit/@item.Randevu.RandevuId">Düzenle</a>
-					<a class="btn btn-info" style="width:20%;background-color:#f6e1c5" href="/Randevu/Remove/@item.Randevu.RandevuId">Sil</a>
+					<a class="btn btn-info" style="width:30%;background-color:#f6e1c5" href="\Musteri/RandevuEdit/@item.Randevu.RandevuId">Düzenle</a>
+					<a class="btn btn-info" style="width:25%;background-color:#f6e1c5" href="\Musteri/RandevuRemove/@item.Randevu.RandevuId">Sil</a>
 			
 			</td>
 			

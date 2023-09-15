@@ -1,0 +1,46 @@
+﻿@model List<NETCore_Demo_StajProject.DAL.Personel>
+
+@{
+    Layout="_LayoutAdmin";
+}
+
+<a class="btn btn-info" style="background-color:#f6e1c5;margin-top:10px" href="\Admin/PersonelCreate"> Personel Ekle</a>
+<a class="btn btn-info" style="background-color:#f6e1c5;margin-top:10px" href="\Gorev\Index"> Görev Listesini Görüntüle</a>
+<a class="btn btn-info" style="background-color:#f6e1c5;margin-top:10px" href="\UzmanlikAlanlari\Index"> Uzmanlık Alanları Listesini Görüntüle</a>
+<table class="table"style=" margin-top:30px">
+    <thead style="width:100%;background-color:#FDF5E6">
+           <tr>       
+             <th>ID</th>
+             <th>Personel Ad</th>
+             <th>Personel Soyad</th> 
+             <th>Personel Cinsiyet</th>
+             <th>Personel Mail</th> 
+             <th>Personel Parola</th>
+             <th>Personel Tel</th>
+             <th>Ekip Lideri Id</th>
+             <th></th>
+           </tr>
+
+    </thead>
+    @foreach(var item in Model){
+        <tr style="width:100%;background-color:#FFEBCD">
+            <td>@item.PersonelId</td> 
+            <td>@item.PersonelAd</td>
+            <td>@item.PersonelSoyad</td> 
+            <td>@item.PersonelCinsiyet</td>
+            <td>@item.PersonelMail</td> 
+            <td>@item.PersonelParola</td>
+            <td>@item.PersonelTel</td>
+            <td>@item.EkiplideriId</td>
+
+            <td>
+                <a class="btn btn-info" style="width:30%;background-color:#f6e1c5" href="\Admin/PersonelEdit/@item.PersonelId">Düzenle</a>
+                <a class="btn btn-info" style="width:20%;background-color:#f6e1c5" href="\Admin/PersonelRemove/@item.PersonelId">Sil</a>
+                <a class="btn btn-info" style="width:30%;background-color:#f6e1c5" href="\Personel\PersonelGorevleri\@item.PersonelId">Görevleri</a>
+                <a class="btn btn-info" style="width:75%;background-color:#f6e1c5" href="\Personel\PersonelAlanlari\@item.PersonelId">Uzmanlık Alanları</a>
+                <a class="btn btn-info" style="width:75%;background-color:#f6e1c5" href="\Admin/PersonelRandevuGoruntule\@item.PersonelId">Randevuları</a>
+            </td>
+         </tr>
+}
+</table>
+

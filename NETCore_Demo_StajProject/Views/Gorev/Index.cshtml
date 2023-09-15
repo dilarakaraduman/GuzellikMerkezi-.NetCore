@@ -2,22 +2,26 @@
 @{
     Layout="_LayoutAdmin";
 }
-<a class="btn btn-info" asp-action="create" asp-controller="Gorev">+Ekle</a>
-
-<table class="table">
-    <thead>
+<a class="btn btn-info" style="background-color:#f6e1c5;margin-top:10px" asp-action="create" asp-controller="Gorev">Yeni Görev Ekle</a>
+<div style="height:440px">
+    <table class="table"style="margin-top:30px">
+    <thead style="width:100%;background-color:#FDF5E6">
            <tr>       
-             <th>ID</th>
-             <th>Gorev Adı</th>           
+             <th>Id</th>
+             <th>Gorev Adı</th> 
+             <th></th>
            </tr>
 
     </thead>
     @foreach(var item in Model){
-         <tr>
+        <tr style="width:100%;background-color:#FFEBCD">
             <td>@item.GorevId</td> 
             <td>@item.GorevAd</td>
-              <td><a class="btn btn-info" href="Edit\@item.GorevId"> + Düzenle</a>&nbsp
-                <a class="btn btn-info" href="Remove\@item.GorevId">Sil</a></td>
+            <td>
+                <a class="btn btn-info" style="width:30%;background-color:#f6e1c5" href="/Gorev\Edit\@item.GorevId">Düzenle</a>&nbsp
+                    <a class="btn btn-info" style="width:30%;background-color:#f6e1c5" href="/Gorev\Remove\@item.GorevId">Sil</a>
+            </td>
          </tr>
 }
 </table>
+</div>

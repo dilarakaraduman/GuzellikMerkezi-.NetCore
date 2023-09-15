@@ -2,10 +2,43 @@
 @{
     Layout="_LayoutAdmin";
 }
+@Html.HiddenFor(m=>m.PersonelId)
 <form asp-controller="Personel" asp-action="Edit" method="post">
 
-    <input type="hidden" asp-for="PersonelId" />
-    <input  asp-for="PersonelAd" />
+	<table style="width:70%;height:380px;margin-top:180px">
 
-    <button type="submit" style="width:20%;background-color:#f6e1c5" class="btn btn-primary">Düzenle</button>
+		<tr>
+			<th> Personel Ad:</th>
+			<input type="hidden" asp-for="PersonelId" />
+			<td><input asp-for="PersonelAd" />  </td>
+		</tr>
+		<tr>
+			<th> Personel Soyad: </th>
+			<td> <input asp-for="PersonelSoyad" />           </td>
+		</tr>
+		<tr>
+			<th> Personel Cinsiyet: </th>
+			<td> <input asp-for="PersonelCinsiyet" />       </td>
+		</tr>
+		<tr>
+			<th> Personel Tel: </th>
+			<td> <input asp-for="PersonelTel" />            </td>
+		</tr>
+		<tr>
+			<th> Personel Mail: </th>
+			<td> <input asp-for="PersonelMail" />           </td>
+		</tr>
+		<tr>
+			<th> Personel Parola :</th>
+			<td> <input asp-for="PersonelParola" />         </td>
+		</tr>
+		<tr>
+			<th> Personel Ekip Lideri Id :</th>
+			<td> <input asp-for="EkiplideriId" />           </td>
+		</tr>
+
+	</table>
+	<br />
+
+	<button type="submit" style="width:20%;background-color:#f6e1c5" class="btn btn-primary">Düzenle</button>
 </form>

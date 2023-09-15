@@ -1,23 +1,37 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@{
+    Layout = "_LayoutPersonel";
+}
+<div style="height:230px">
 
-<div class="text-center">
-    <h1 class="display-4">HOŞGELDİNİZ</h1>
+    <div class="text-center">
+        <h1 class="display-4">HOŞGELDİNİZ</h1>
 
-</div>
-<div>
-    <a class="btn btn-info" style="width:20%;background-color:#f6e1c5" href="\Randevu\RandevuGoruntule">Randevu Goruntule</a><br />
-    Firma Adı:
-    @ViewBag.FirmaAdi
-    <br/>
-    Adres:
-    @ViewData["Adres"]
-    <br/>
-    Telefon:
-    @TempData["Telefon"]
-    <div align="center">
-    <a href="#"><img src="http://artstyle.com.tr/blog/wp-content/uploads/2014/05/g%C3%BCzellik-2.jpg"
-        alt="Örnek Resim" style="width:400px;height: 250px" /></a>
     </div>
+
+    <div class="text-center">
+    @*    <a class="btn btn-info" style="width:20%;background-color:#f6e1c5"
+           href="\Randevu\RandevuGoruntule">Randevu Goruntule</a><br />*@
+            <a class="btn btn-info" style="width:20%;background-color:#f6e1c5"
+               href="\Personel\AktifRandevular">Aktif Randevular</a><br />
+            <a class="btn btn-info" style="width:20%;background-color:#f6e1c5"
+               href="\Personel\GecmisRandevular">Geçmiş Randevular</a><br />
+     </div>
+
+     <div>
+
+            Firma Adı:
+            @ViewBag.FirmaAdi
+            <br />
+
+            Adres:
+            @ViewData["Adres"]
+            <br />
+
+            Telefon:
+            @TempData["Telefon"]
+    </div>
+
 </div>

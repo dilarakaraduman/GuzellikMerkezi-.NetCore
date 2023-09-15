@@ -4,14 +4,16 @@
 }
 <form asp-controller="UzmanlikAlanlari" asp-action="Create" method="post">
 
-<table style="width:70%">
+    <div style="height:420px">
+        <table style="width:40%;margin-top:200px;background-color:#f6e1c5">
 
-  <tr>
-          <th> UzmanlikAlanlari Ad:</th> 
-            <td><input asp-for="UzmanlikAd" />  </td>
+            <tr>
+                <th> Uzmanlık Alanları Ad:</th>
+                <td><input asp-for="UzmanlikAd" /></td>
+            </tr>
+        </table>
+        <br />  <button type="submit" style="background-color:#f6e1c5" class="btn btn-primary">Kaydet</button>
 
-  </tr>
-</table>
-  <br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+    </div>
 </form>
 

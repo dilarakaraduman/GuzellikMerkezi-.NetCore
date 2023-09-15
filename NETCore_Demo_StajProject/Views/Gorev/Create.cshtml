@@ -5,15 +5,18 @@
 }
 <form asp-controller="Gorev" asp-action="Create" method="post">
 
-<table style="width:70%">
+    <div style="height:420px">
+        <table style="width:40%;margin-top:200px;background-color:#f6e1c5">
 
-  <tr>
-          <th> Gorev Ad:</th> 
-            <td><input asp-for="GorevAd" />                </td>
+            <tr>
+                <th> Görev Ad:</th>
+                <td><input asp-for="GorevAd" /></td>
 
-  </tr>
-</table>
-  <br />  <button type="submit" class="btn btn-primary">Kaydet</button>
+            </tr>
+        </table>
+        <br />  <button type="submit" style="background-color:#f6e1c5" class="btn btn-primary">Kaydet</button>
+
+    </div>
 </form>
 
 

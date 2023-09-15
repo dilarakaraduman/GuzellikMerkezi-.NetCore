@@ -11,11 +11,15 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
 	public class RandevuController : Controller
 	{
 		DataBaseContext db = new DataBaseContext();
+
+		#region Randevu Listeleme
+		[LoginFilter]
 		public IActionResult Index()
 		{
 			var musteri = ProgramUtility.GetMusteri(HttpContext);
 			ViewData["musteri"] = musteri;
-			DataBaseContext db = new DataBaseContext();
+
+
 			var r = (from randevu in db.Randevu
 					 join s in db.Salon on randevu.SalonId equals s.SalonId
 					 join p in db.Personel on randevu.PersonelId equals p.PersonelId
@@ -34,9 +38,11 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
 			return View(r);
 
 		}
-		[LoginFilter]
-		#region Yeni Kayıt
-		public IActionResult Create()
+        #endregion
+
+        #region Yeni Kayıt
+        [LoginFilter]
+        public IActionResult Create()
 		{
 			var musteriSession = HttpContext.Session.GetString(ProgramUtility.musteriSession);
 			if (musteriSession == null) return RedirectToAction("Giris", "Home");
@@ -63,7 +69,7 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
 			try
 			{
 				DateTime now = DateTime.Now;
-				TimeSpan desired_time = new TimeSpan(9, 30, 0);
+				TimeSpan desired_time = new TimeSpan(9, 00, 0);
 				DateTime desired_datetime = DateTime.Today.Add(desired_time);
 				TimeSpan elapsed_time = now - desired_datetime;
 				float second = (float)elapsed_time.TotalSeconds;
@@ -87,8 +93,16 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
 					return RedirectToAction("Create");
 
 				}
-				else if(model.Tarih == DateTime.Now.Date && (second > count)){
-                    TempData["ErrorMessage1"] = "Randevu geçmiş tarih.";
+				else if(model.Tarih <= DateTime.Now.Date){
+
+                   if(model.Tarih < DateTime.Now.Date){
+                        TempData["ErrorMessage1"] = "Randevu geçmiş tarih.";
+                    }
+                    else if (model.Tarih == DateTime.Now.Date && (second > count))
+					{
+                        TempData["ErrorMessage1"] = "Randevu geçmiş tarih.";
+                       
+                    }
                     return RedirectToAction("Create");
                 }
 				else {
@@ -104,20 +118,26 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
 			}
 			return View();
 		}
-		#endregion
-		[LoginFilter]
-		#region Kayıt Güncelleme
-		public IActionResult Edit(int id)
+        #endregion
+
+        #region Kayıt Güncelleme
+        [LoginFilter]
+        public IActionResult Edit(int id)
 		{
 			//id boş ise listeye döndür
-			var musteriSession = HttpContext.Session.GetString(ProgramUtility.musteriSession);
-			if (musteriSession == null) return RedirectToAction("Giris", "Home");
-			Musteri musteri = new Musteri();
-			musteri = JsonSerializer.Deserialize<Musteri>(musteriSession);
-			ViewData["musteri"] = musteri;
-			var r = db.Randevu.Find(id);
+			var personelSession = HttpContext.Session.GetString(ProgramUtility.personelSession);
+			if (personelSession == null) return RedirectToAction("Giris", "Home");
+			Personel personel = new Personel();
+			personel = JsonSerializer.Deserialize<Personel>(personelSession);
 
-			ViewBag.PersonelId = new SelectList(db.Personel.ToList(), "PersonelId", "PersonelAd", r.PersonelId);
+			ViewData["personel"] = personel;
+			var r = db.Randevu.Find(id);
+            ViewBag.PersonelId = r.PersonelId;
+            //var x=db.Randevu.Where(a=>a.PersonelId == r.PersonelId).ToList();
+            //ViewBag.RandevuId = x;
+            r.Tarih = DateTime.Now;
+
+			ViewBag.MusteriId = new SelectList(db.Musteri.ToList(), "MusteriId", "MusteriAd", r.MusteriId);
 			ViewBag.OperasyonId = new SelectList(db.Operasyonlar.ToList(), "OperasyonId", "OperasyonAd", r.OperasyonId);
 			ViewBag.SalonId = new SelectList(db.Salon.ToList(), "SalonId", "SalonNo", r.SalonId);
 			ViewBag.SaatId = new SelectList(db.Saat.ToList(), "SaatId", "SaatNo");
@@ -127,8 +147,8 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
 		[ActionName("Edit")]
 		public IActionResult EditPost(Randevu model)
 		{
-			try
-			{
+			//try
+			//{
                 DateTime now = DateTime.Now;
                 TimeSpan desired_time = new TimeSpan(9, 00, 0);
                 DateTime desired_datetime = DateTime.Today.Add(desired_time);
@@ -142,7 +162,7 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
                 float count = (float)elapsed_Time.TotalSeconds;
 
                 var query = (from r in db.Randevu
-                             where r.PersonelId == model.PersonelId && r.saatId == model.saatId && r.SalonId == model.SalonId
+                             where r.MusteriId == model.MusteriId && r.saatId == model.saatId && r.SalonId == model.SalonId
                              && r.Tarih == model.Tarih
                              select r
                                  ).Any();
@@ -150,31 +170,32 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
 				if (query)
 				{
 					TempData["ErrorMessage"] = "Randevu dolu.";
-					return RedirectToAction("Create");
+					return RedirectToAction("Edit");
 
 				}
 				else if (model.Tarih == DateTime.Now.Date && (second > count))
 				{
 					TempData["ErrorMessage1"] = "Randevu geçmiş tarih.";
-					return RedirectToAction("Create");
+					return RedirectToAction("Edit");
 				}
 				else
 				{
-					db.Randevu.Add(model);
+					db.Randevu.Update(model);
 					db.SaveChanges();
-					return RedirectToAction("Index");
+					return RedirectToAction("PersonelIndex","Admin");
 				}
-			}
-			catch (Exception ex)
-			{
-				throw new Exception(ex.Message);
-			}
+			//}
+			//catch (Exception ex)
+			//{
+			//	throw new Exception(ex.Message);
+			//}
 
 		}
-		#endregion
-		[LoginFilter]
-		#region Kayıt Silme
-		public IActionResult Remove(int id)
+        #endregion
+
+        #region Kayıt Silme
+        [LoginFilter]
+        public IActionResult Remove(int id)
 		{
 			DataBaseContext db = new DataBaseContext();
 			var r = db.Randevu.Find(id);
@@ -187,91 +208,69 @@ namespace NETCore_Demo_StajProject.Controllers.Musteriler
 			DataBaseContext db = new DataBaseContext();
 			db.Randevu.Remove(model);
 			db.SaveChanges();
-			return RedirectToAction("Index");
+            return RedirectToAction("PersonelIndex", "Admin");
+        }
 
-		}
+        #endregion
 
-		#endregion
+        #region Geçmiş Randevular
+        [LoginFilter]
+        public IActionResult GecmisRandevular()
+        {
+            var musteri = ProgramUtility.GetMusteri(HttpContext);
+            ViewData["musteri"] = musteri;
 
-		[LoginFilter]
-		public IActionResult GecmisRandevular()
-		{
-			var musteri = ProgramUtility.GetMusteri(HttpContext);
-			ViewData["musteri"] = musteri;
+            using (DataBaseContext db = new DataBaseContext())
+            {
+                var r = (from randevu in db.Randevu
+                         join s in db.Salon on randevu.SalonId equals s.SalonId
+                         join p in db.Personel on randevu.PersonelId equals p.PersonelId
+                         join m in db.Musteri on randevu.MusteriId equals m.MusteriId
+                         join op in db.Operasyonlar on randevu.OperasyonId equals op.OperasyonId
+                         where randevu.MusteriId == musteri.MusteriId && randevu.Tarih < DateTime.Now
+                         select new RandevuVM()
+                         {
+                             Randevu = randevu,
+                             Salon = s,
+                             Musteri = m,
+                             Personel = p,
+                             Operasyonlar = op
+                         }).ToList();
 
-			using (DataBaseContext db = new DataBaseContext())
-			{
-				var r = (from randevu in db.Randevu
-						 join s in db.Salon on randevu.SalonId equals s.SalonId
-						 join p in db.Personel on randevu.PersonelId equals p.PersonelId
-						 join m in db.Musteri on randevu.MusteriId equals m.MusteriId
-						 join op in db.Operasyonlar on randevu.OperasyonId equals op.OperasyonId
-						 where randevu.MusteriId == musteri.MusteriId && randevu.Tarih < DateTime.Now
-						 select new RandevuVM()
-						 {
-							 Randevu = randevu,
-							 Salon = s,
-							 Musteri = m,
-							 Personel = p,
-							 Operasyonlar = op
-						 }).ToList();
+                return View(r);
+            }
+        }
+        #endregion
 
-				return View(r);
-			}
-		}
-		[LoginFilter]
-		public IActionResult AktifRandevular()
-		{
-			var musteri = ProgramUtility.GetMusteri(HttpContext);
-			ViewData["musteri"] = musteri;
+        #region Aktif Randevular
+        [LoginFilter]
+        public IActionResult AktifRandevular()
+        {
+            var musteri = ProgramUtility.GetMusteri(HttpContext);
+            ViewData["musteri"] = musteri;
 
-			using (DataBaseContext db = new DataBaseContext())
-			{
-				var r = (from randevu in db.Randevu
-						 join s in db.Salon on randevu.SalonId equals s.SalonId
-						 join p in db.Personel on randevu.PersonelId equals p.PersonelId
-						 join m in db.Musteri on randevu.MusteriId equals m.MusteriId
-						 join op in db.Operasyonlar on randevu.OperasyonId equals op.OperasyonId
-						 where randevu.MusteriId == musteri.MusteriId && randevu.Tarih > DateTime.Now
-						 select new RandevuVM()
-						 {
-							 Randevu = randevu,
-							 Salon = s,
-							 Musteri = m,
-							 Personel = p,
-							 Operasyonlar = op
-						 }).ToList();
+            using (DataBaseContext db = new DataBaseContext())
+            {
+                var r = (from randevu in db.Randevu
+                         join s in db.Salon on randevu.SalonId equals s.SalonId
+                         join p in db.Personel on randevu.PersonelId equals p.PersonelId
+                         join m in db.Musteri on randevu.MusteriId equals m.MusteriId
+                         join op in db.Operasyonlar on randevu.OperasyonId equals op.OperasyonId
+                         where randevu.MusteriId == musteri.MusteriId && randevu.Tarih > DateTime.Now
+                         select new RandevuVM()
+                         {
+                             Randevu = randevu,
+                             Salon = s,
+                             Musteri = m,
+                             Personel = p,
+                             Operasyonlar = op
+                         }).ToList();
 
-				return View(r);
-			}
-		}
-		[LoginFilter]
-		public IActionResult RandevuGoruntule()
-		{
+                return View(r);
+            }
+        }
+        #endregion
 
-			var personel = ProgramUtility.GetPersonel(HttpContext);
-			ViewData["personel"] = personel;
-
-			using (DataBaseContext db = new DataBaseContext())
-			{
-				var r = (from randevu in db.Randevu
-						 join s in db.Salon on randevu.SalonId equals s.SalonId
-						 join p in db.Personel on randevu.PersonelId equals p.PersonelId
-						 join op in db.Operasyonlar on randevu.OperasyonId equals op.OperasyonId
-						 join m in db.Musteri on randevu.MusteriId equals m.MusteriId
-						 where randevu.PersonelId == personel.PersonelId
-						 select new RandevuVM()
-						 {
-							 Musteri = m,
-							 Randevu = randevu,
-							 Salon = s,
-							 Personel = p,
-							 Operasyonlar = op
-						 }).ToList();
-
-				return View(r);
-			}
-		}
-	}
+    }
 }
 

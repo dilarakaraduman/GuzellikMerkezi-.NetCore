@@ -9,19 +9,18 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
 {
     public class GorevController : Controller
     {
-        [LoginFilter]
+        DataBaseContext db = new DataBaseContext();
         #region Listeleme
         public IActionResult Index()
         {
-            DataBaseContext db = new DataBaseContext();
             var r = db.Gorev.ToList();
             return View(r);
 
         }
         #endregion
-        [LoginFilter]
+      
         #region Yeni Kayıt
-
+        [LoginFilter]
         public IActionResult Create()
         {
             return View();
@@ -44,11 +43,11 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
             return View();
         }
         #endregion
-        [LoginFilter]
+       
         #region Kayıt Güncelleme
+        [LoginFilter]
         public IActionResult Edit(int id)
         {
-            DataBaseContext db = new DataBaseContext();
             var r = db.Gorev.Find(id);
             return View(r);
         }
@@ -56,18 +55,18 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
         [ActionName("Edit")]
         public IActionResult EditPost(Gorev model)
         {
-            DataBaseContext db = new DataBaseContext();
             db.Gorev.Update(model);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Index","Gorev");
 
         }
         #endregion
-        [LoginFilter]
+       
         #region Kayıt Silme
+        [LoginFilter]
         public IActionResult Remove(int id)
         {
-            DataBaseContext db = new DataBaseContext();
+            
             var r = db.Gorev.Find(id);
             return View(r);
         }
@@ -75,10 +74,18 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
         [ActionName("Remove")]
         public IActionResult RemovePost(Gorev model)
         {
-            DataBaseContext db = new DataBaseContext();
-            db.Gorev.Remove(model);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+               
+                db.Gorev.Remove(model);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                TempData["ErrorMessage2"] = "İlk önce personelin görevlerini silin";
+                return RedirectToAction("Remove");
+            }
 
         }
 

@@ -1,23 +1,12 @@
 ﻿@model NETCore_Demo_StajProject.DAL.Randevu
 @using NETCore_Demo_StajProject.DAL
 
-@*@{
-    Layout="_LayoutAdmin";
-}*@
 
 <form asp-controller="Randevu" asp-action="Create" method="post">
 
     @Html.HiddenFor(m =>m.MusteriId)
-    <table style="width:70%">
+    <table style="width:70%;height:150px">
 
-        @*dropdown koyulacak*@
-        <tr>
-            @*   <th> Musteri Ad:  </th>
-            <td>
-            @(((Musteri)ViewData["musteri"]).MusteriAd)
-
-            </td>*@
-        </tr>
         <tr>
             <th> Personel Ad:</th>
             <td>
@@ -73,7 +62,7 @@
             <div class="alert-content">
                 @TempData["ErrorMessage1"]
             </div>
-        </div> 
+        </div>
     }
     <style>
         .custom-alert {

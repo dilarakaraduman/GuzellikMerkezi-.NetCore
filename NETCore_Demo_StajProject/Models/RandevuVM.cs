@@ -11,6 +11,6 @@ namespace NETCore_Demo_StajProject.Models
         public Saat Saat { get; set; }
         //public UzmanlikAlanlari UzmanlikAlanlari { get; set; }
         public Operasyonlar Operasyonlar { get; set; }
-        //public Saat Saat { get; set; }
+      
     }
 }

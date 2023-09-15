@@ -1,7 +1,7 @@
 ﻿@model List<NETCore_Demo_StajProject.Models.RandevuVM>
 <form asp-controller="Randevu" asp-action="GecmisRandevular" method="post">
- 
-<table class="table">
+
+	<table class="table" style="background-color:#FDF5E6;height:180px">
 	<thead>
 		<tr>
 			<th>Operasyon Adı</th>
@@ -15,13 +15,13 @@
 	</thead>
 	@foreach (var item in Model)
 	{
-		<tr>
+			<tr style="background-color:#FFEBCD">
 			<td>@item.Operasyonlar.OperasyonAd</td>
 			<td>@item.Personel.PersonelAd</td>
 			<td>@(item.Randevu?.Tarih.ToShortDateString())</td>
+			<td>@(item.Randevu?.saatId)</td>
 			<td>@item.Salon.SalonNo</td>
-			
-			
+	
 		</tr>
 	}
 </table>

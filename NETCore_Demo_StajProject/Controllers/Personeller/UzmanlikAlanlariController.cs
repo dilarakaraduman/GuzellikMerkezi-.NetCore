@@ -7,19 +7,19 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
 {
     public class UzmanlikAlanlariController : Controller
     {
-        [LoginFilter]
+        DataBaseContext db = new DataBaseContext();
         #region Listeleme
+        [LoginFilter]
         public IActionResult Index()
         {
-            DataBaseContext db = new DataBaseContext();
             var r = db.UzmanlikAlanlari.ToList();
             return View(r);
 
         }
         #endregion
-        [LoginFilter]
-        #region Yeni Kayıt
 
+        #region Yeni Kayıt
+        [LoginFilter]
         public IActionResult Create()
         {
             return View();
@@ -43,30 +43,29 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
             return View();
         }
         #endregion
-        [LoginFilter]
+
         #region Kayıt Güncelleme
+        [LoginFilter]
         public IActionResult Edit(int id)
         {
-            DataBaseContext db = new DataBaseContext();
             var r = db.UzmanlikAlanlari.Find(id);
             return View(r);
         }
         [HttpPost]
         [ActionName("Edit")]
         public IActionResult EditPost(UzmanlikAlanlari model)
-        {
-            DataBaseContext db = new DataBaseContext();
+        {  
             db.UzmanlikAlanlari.Update(model);
             db.SaveChanges();
-            return View();
+            return RedirectToAction("Index");
 
         }
         #endregion
-        [LoginFilter]
+
         #region Kayıt Silme
+        [LoginFilter]
         public IActionResult Remove(int id)
         {
-            DataBaseContext db = new DataBaseContext();
             var r = db.UzmanlikAlanlari.Find(id);
             return View(r);
         }
@@ -74,10 +73,18 @@ namespace NETCore_Demo_StajProject.Controllers.Personeller
         [ActionName("Remove")]
         public IActionResult RemovePost(UzmanlikAlanlari model)
         {
-            DataBaseContext db = new DataBaseContext();
-            db.UzmanlikAlanlari.Remove(model);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                db.UzmanlikAlanlari.Remove(model);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                TempData["ErrorMessage2"] = "İlk önce personellerin uzmanlık alanını silin";
+                return RedirectToAction("Remove");
+            }
+           
 
         }
 

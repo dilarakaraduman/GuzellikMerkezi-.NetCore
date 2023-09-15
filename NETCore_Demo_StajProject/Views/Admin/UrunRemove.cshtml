@@ -1,0 +1,13 @@
+﻿@model NETCore_Demo_StajProject.DAL.Urun
+@{
+    Layout = "_LayoutAdmin";
+}
+<form asp-controller="Admin" asp-action="UrunRemove" method="post">
+    @Html.HiddenFor(m=>m.Id)
+    <div class="text-center" style="height:470px;margin-top:20px;">
+
+        <button type="submit" style="height:25%;width:15%;background-color:#f6e1c5;margin-top:180px" class="btn btn-primary">Sil</button>
+
+
+    </div>
+</form>
